@@ -10,6 +10,5 @@ data/*.json
 data/*.log
 data/image/character/[0-9]*.png
 data/game/weapons-need-trans.py
-
 # VS Code
 .vscode
