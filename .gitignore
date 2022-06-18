@@ -10,5 +10,8 @@ data/*.json
 data/*.log
 data/image/character/[0-9]*.png
 data/game/weapons-need-trans.py
+requirements.txt
+runtime.txt
+Procfile
 # VS Code
 .vscode
