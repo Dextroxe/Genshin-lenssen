@@ -35,8 +35,8 @@ def trimCookie(cookie: str) -> str:
         new_cookie = None
     return new_cookie
 
-__server_dict = {'os_usa': 'US server', 'os_euro': 'Europea server', 'os_asia': 'Asia server', 'os_cht': 'Taiwan, Hong Kong and Macau',
-     '1': 'Sky Island', '2': 'Sky Island', '5': 'World Tree', '6': 'America server', '7': 'Europea server', '8': ' Asia server', '9': 'Taiwan, Hong Kong and Macau'}
+__server_dict = {'os_usa': 'US', 'os_euro': 'Europea', 'os_asia': 'Asia', 'os_cht': 'Taiwan, Hong Kong and Macau',
+     '1': 'Sky Island', '2': 'Sky Island', '5': 'World Tree', '6': 'America', '7': 'Europea', '8': 'Asia', '9': 'Taiwan, Hong Kong and Macau'}
 def getServerName(key: str) -> str:
     return __server_dict.get(key)
 

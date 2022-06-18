@@ -95,7 +95,7 @@ class GenshinInfo(commands.Cog, name='Genshin_Impact_Information'):
             await interaction.response.send_message(result)
 
     # Generate personal record card
-    @app_commands.command(name='embedded_profile', description='Generating Personal embedded Profile')
+    @app_commands.command(name='summary_card', description='Generating Personal embed Profile with cute pic :)')
     @app_commands.checks.cooldown(1, config.slash_cmd_cooldown)
     async def slash_card(self, interaction: discord.Interaction):
         await interaction.response.defer()
@@ -169,7 +169,7 @@ class GenshinInfo(commands.Cog, name='Genshin_Impact_Information'):
         await interaction.edit_original_message(view=None)
 
     # Character showcase
-    @app_commands.command(name='character_showcase', description='Query the public character showcase of the player with the specified UID')
+    @app_commands.command(name='profile_characters', description='Query the public character showcase of the player with the specified UID')
     @app_commands.describe(uid="The UID of the player to be queried, if the helper has saved the data, you don't need to fill in this field to check yourself"
     )
     async def slash_showcase(self, interaction: discord.Interaction, uid: Optional[int] = None):

@@ -44,7 +44,7 @@ def drawRecordCard(avatar_bytes: bytes, record_card: genshin.models.RecordCard, 
     img = img.convert('RGBA')
 
     avatar = avatar = Image.open(BytesIO(avatar_bytes)).resize((250, 250))
-    drawAvatar(img, avatar, (70, 210))
+    drawAvatar(img, avatar, (70, 235))
 
     drawRoundedRect(img, (340, 270, 990, 460), radius=30, fill=(0, 0, 0, 120))
     drawRoundedRect(img, (90, 520, 990, 1730), radius=30, fill=(0, 0, 0, 120))
@@ -52,21 +52,21 @@ def drawRecordCard(avatar_bytes: bytes, record_card: genshin.models.RecordCard, 
     white = (255, 255, 255, 255)
     grey = (230, 230, 230, 255)
 
-    drawText(img, (665, 335), record_card.nickname, 'RayligBold-owAya.otf', 88, white, 'mm')
-    drawText(img, (665, 415), f'{getServerName(record_card.server)}  Lv.{record_card.level}  UID:{record_card.uid}', 'RayligSemibold-Wy9mE.otf', 40, white, 'mm')
+    drawText(img, (665, 335), record_card.nickname, 'lack-regular.otf', 88, white, 'mm')
+    drawText(img, (665, 415), f'{getServerName(record_card.server)}  Lv.{record_card.level}  UID:{record_card.uid}', 'lack-regular.otf', 40, white, 'mm')
     
     s = user_stats.stats
     stat_list = [(s.days_active, 'active days'), (s.achievements, 'Achievements'), (s.characters, 'characters'),
                 (s.anemoculi, "Anemoculi's"), (s.geoculi, "Geoculi's"), (s.electroculi, "electroculi's"),
-                (s.unlocked_waypoints, 'Waypoints'), (s.unlocked_domains, 'Domains'), (s.spiral_abyss, 'Abyss'),
+                (s.unlocked_waypoints, 'Waypoints'), (s.unlocked_domains, 'Domains'), (s.spiral_abyss, 'Abyss-Floors'),
                 (s.luxurious_chests, 'Luxurious'), (s.precious_chests, 'Precious'), (s.exquisite_chests, 'Exquisites'),
                 (s.common_chests, 'Common'), (s.remarkable_chests, 'Remarkable')]
 
     for n, stat in enumerate(stat_list):
         column = int(n % 3)
         row = int(n / 3)
-        drawText(img, (245 + column * 295, 700 + row * 230), str(stat[1]), 'RayligAlternatebold-d9dlE.otf', 40, grey, 'mm')
-        drawText(img, (245 + column * 295, 630 + row * 230), str(stat[0]), 'RayligAlternatebold-d9dlE.otf', 80, white, 'mm')
+        drawText(img, (245 + column * 295, 700 + row * 230), str(stat[1]), 'lack-italic.otf', 40, grey, 'mm')
+        drawText(img, (245 + column * 295, 630 + row * 230), str(stat[0]), 'lack-italic.otf', 80, white, 'mm')
 
     img = img.convert('RGB')
     fp = BytesIO()
@@ -139,7 +139,7 @@ def drawAbyssCard(abyss: genshin.models.SpiralAbyss) -> BytesIO:
                     x = left_upper[0] + k * (character_size[0] + 2 * character_pad)
                     y = left_upper[1]
                     drawCharacter(img, character, (172, 210), (x, y))
-                    drawText(img, (x + character_size[0] / 2, y + character_size[1] * 0.90), f'{character.level} lvl', 'RayligSemibold-Wy9mE.otf', 30, (50, 50, 50), 'mm')
+                    drawText(img, (x + character_size[0] / 2, y + character_size[1] * 0.90), f'{character.level} lvl', 'lack-italic.otf', 30, (50, 50, 50), 'mm')
     img = img.convert('RGB')
     fp = BytesIO()
     img.save(fp, 'jpeg', optimize=True, quality=40)

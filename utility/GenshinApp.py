@@ -510,7 +510,7 @@ class GenshinApp:
         msg="will happen "
         result += f'{emoji.notes.resin}Current original resin:{notes.current_resin}/{notes.max_resin}\n'
         if notes.current_resin >= notes.max_resin:
-            recover_time = 'is recovered! <:search:987357570308124672>'
+            recover_time = 'is completed! <:search:987357570308124672>'
         else:
             day_msg = msg+getDayOfWeek(notes.resin_recovery_time)
             recover_time = f'{day_msg} {notes.resin_recovery_time.strftime("%H:%M")}'
@@ -524,7 +524,7 @@ class GenshinApp:
         result += f'{emoji.notes.realm_currency} Current Realm Currency {notes.current_realm_currency}/{notes.max_realm_currency}\n'
         if notes.max_realm_currency > 0:
             if notes.current_realm_currency >= notes.max_realm_currency:
-                recover_time = 'is completed! <:search:987357570308124672>'
+                recover_time = 'is already fully recovered! <:search:987357570308124672>'
             else:
                 day_msg = msg+getDayOfWeek(notes.realm_currency_recovery_time)
                 recover_time = f'{day_msg} {notes.realm_currency_recovery_time.strftime("%H:%M")}'

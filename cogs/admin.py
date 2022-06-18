@@ -10,7 +10,7 @@ from utility.config import config
 class Admin(commands.Cog):
     def __init__(self, bot):
         self.bot: commands.Bot = bot
-        self.presence_string: list[str] = ['Genshin Impact','/cookie u want some','genshin lessen']
+        self.presence_string: list[str] = ['Genshin Impact','/notes just do it!','genshin-lessen']
         self.change_presence.start()
     
     # Sync Slash commands to global or current server
@@ -46,7 +46,7 @@ class Admin(commands.Cog):
                     else:
                         count += 1
                         break
-        await interaction.edit_original_message(content=f'已廣播訊息到 {count} / {len(self.bot.guilds)} 伺服器')
+        await interaction.edit_original_message(content=f'broadcast message to {count} / {len(self.bot.guilds)} server')
     
     # Show bot related status
     @app_commands.command(name='status', description='show helper status')
