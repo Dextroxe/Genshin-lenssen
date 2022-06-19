@@ -118,7 +118,7 @@ class Schedule(commands.Cog, name='Automation(BETA)'):
                 self.__add_user(str(interaction.user.id), str(interaction.channel_id), self.__daily_dict, self.__daily_reward_filename, mention=daily_mention_btn.value)
                 if choose_game_btn.value == 'Genshin + Honkai 3': # Added Honkai Impact 3 users
                     self.__add_honkai_user(str(interaction.user.id), self.__daily_dict, self.__daily_reward_filename)
-                await interaction.edit_original_message(content=f'{choose_game_btn.value}Daily automatic check-in has been turned on, and a genshin-lessen when checking in{"會" if daily_mention_btn.value else "Will not"}tag you', view=None)
+                await interaction.edit_original_message(content=f'{choose_game_btn.value}Daily automatic check-in has been turned on, and when checking in genshin-lessen will{" <:search:987357570308124672>" if daily_mention_btn.value else " not"} tag you', view=None)
             elif switch == 0: # Turn off check-in
                 self.__remove_user(str(interaction.user.id), self.__daily_dict, self.__daily_reward_filename)
                 await interaction.response.send_message('Daily automatic check-in is turned off')

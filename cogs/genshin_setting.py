@@ -44,14 +44,12 @@ class Setting(commands.Cog, name='setting'):
              "3. Enter `java` in the address bar first, then paste the code(no space needed btw them), make sure the beginning of the URL becomes `javascript:`\n\n"
              "4. Press Enter, the page will change to display your cookies, select all and copy\n\n"
              "5. Submit the result here, use: `/setup submission to submit the obtained cookie`\n\n```")
-            #  "· Encountered problems? Click the link to see other methods: <https://bit.ly/3LgQkg0>\n"
-            #  "https://i.imgur.com/OQ8arx0.gif")
-            help_link=("https://i.imgur.com/OQ8arx0.gif")
+            help_link=("https://i.imgur.com/CzUeQji.gif")
             footer_text=("Genshin-lenssen")
             code_msg = "```script:d=document.cookie; c=d.includes('account_id') || alert('Expired or invalid cookies, please log out and log in again!'); c && document.write(d)```"
            #customize your embeds
             embed_help = discord.Embed(title='Genshin lessen Cookie Usage and Storage Notice', description=help_msg,color=0xD2E1E1)
-            embed_help.add_field(name='Follow this', value="\n".join([help_link]), inline=True)
+            embed_help.set_image(url=help_link)
             embed_help.timestamp = datetime.utcnow()
             embed_help.set_footer(text='\u200b',icon_url="https://i.imgur.com/Y0eIQKOt.png")
             await interaction.response.send_message(content=code_msg)
@@ -67,7 +65,7 @@ class Setting(commands.Cog, name='setting'):
                  '· For more detailed instructions, you can click on the personal file of the Genshin lessen to view the Baja description text. If you still have doubts, please do not use the Genshin lessen\n'
                  '· When submitting a cookie to Genshin lessen, it means that you have agreed to Genshin lessen to save and use your information\n'
                  '·You can delete the data saved in the helper at any time, please use the `/clear data` command without hesitation\n')
-            embed = discord.Embed(title='Genshin lessen Cookie Usage and Storage Notice', description=msg)
+            embed = discord.Embed(title='Genshin lessen Cookie Usage and Storage Notice', description=msg,color=0xD2E1E1)
             await interaction.response.send_message(embed=embed)
 
     # Set the UID of Yuanshen, and save the specified UID when there are multiple characters in the account

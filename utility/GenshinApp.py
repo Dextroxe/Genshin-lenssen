@@ -476,7 +476,7 @@ class GenshinApp:
         return embed
     
     def parseCharacter(self, character: genshin.models.Character) -> discord.Embed:
-        """Analyze characters, including zodiac, level, favor, weapons, holy relics
+        """Analyze characters, including zodiac, level, favor, weapons, Artifacts
         
          ------
          Parameters
