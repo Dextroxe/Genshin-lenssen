@@ -1,6 +1,7 @@
 import datetime
 import discord
 import genshin
+import asyncio
 from typing import Optional, Sequence
 from discord import app_commands
 from discord.ext import commands
@@ -42,7 +43,7 @@ class GenshinInfo(commands.Cog, name='Genshin_Impact_Information'):
          floor=[Choice(name='show all floors', value=0),
                 Choice(name='only show the last floor', value=1)])
     async def slash_abyss(self, interaction: discord.Interaction, season: int = 1, floor: int = 2):
-        await interaction.response.defer()
+        asyncio.create_task(interaction.response.defer())
         previous = True if season == 0 else False
         result = await genshin_app.getSpiralAbyss(str(interaction.user.id), previous)
         if isinstance(result, str):
@@ -156,7 +157,7 @@ class GenshinInfo(commands.Cog, name='Genshin_Impact_Information'):
     # List of all personal roles
     @app_commands.command(name='my_characters', description='Show all my characters publicly')
     async def slash_character(self, interaction: discord.Interaction):
-        await interaction.response.defer()
+        asyncio.create_task(interaction.response.defer())
         result = await genshin_app.getCharacters(str(interaction.user.id))
 
         if isinstance(result, str):
@@ -173,7 +174,7 @@ class GenshinInfo(commands.Cog, name='Genshin_Impact_Information'):
     @app_commands.describe(uid="The UID of the player to be queried, if the helper has saved the data, you don't need to fill in this field to check yourself"
     )
     async def slash_showcase(self, interaction: discord.Interaction, uid: Optional[int] = None):
-        await interaction.response.defer()
+        asyncio.create_task(interaction.response.defer())
         uid = uid or genshin_app.getUID(str(interaction.user.id))
         log.info(f'[instruction][{interaction.user.id}]character showcase: uid={uid}')
         if uid == None:

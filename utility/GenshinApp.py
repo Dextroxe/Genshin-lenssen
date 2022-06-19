@@ -171,8 +171,9 @@ class GenshinApp:
         if check == False:
             return msg
         client = self.__getGenshinClient(user_id)
+
         try:
-            await client.redeem_code(code, int(self.__user_data[user_id]['uid']))
+            await client.redeem_code(code, int(self.__user_data[user_id]['uid']),lang="en-us")
         except genshin.errors.GenshinException as e:
             log.info(f'[exception][{user_id}]redeemCode: [retcode]{e.retcode} [Exceptions]{e.original}')
             result = e.original
@@ -180,7 +181,7 @@ class GenshinApp:
             log.error(f'[exception][{user_id}]redeemCode: [Exceptions]{e}')
             result = f'{e}'
         else:
-            result = f'Redeem code {code} Used successfully!'
+            result = f'Redeem code {code}  successful!'
         finally:
             return result
     
