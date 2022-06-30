@@ -28,7 +28,7 @@ Use the Genshin-Lessen bot to directly query various information in Genshin Impa
 ## exhibit
 Here more display pictures:
 
-<img src="https://i.imgur.com/R7g7dbG.png" width="400"/> <img src="https://i.imgur.com/SOk0O1w.png" width="300" />
+<img src="https://i.imgur.com/R7g7dbG.png" width="400"/> <img src="https://i.imgur.com/SOk0O1w.png" width="400" />
 
 With this /commands you can easily access the in-game or hoyolab redeem without any hassle
 
