@@ -40,7 +40,7 @@ class GenshinApp:
         user_id = str(user_id)
         cookie = trimCookie(cookie)
         if cookie == None:
-            return f'Invalid cookie, please re-enter (enter `/cookie settings` to display instructions)'
+            return f'Invalid cookie, please re-enter (enter `/setup` to display instructions)'
         client = genshin.Client(lang='en-us')
         client.set_cookies(cookie)
         try:
@@ -232,7 +232,7 @@ class GenshinApp:
             try:
                 reward = await client.claim_daily_reward(game=game)
             except genshin.errors.AlreadyClaimed:
-                return f"{game_name[game]}Today's reward has been received!"
+                return f"{game_name[game]}'s reward has been received!"
             except genshin.errors.GenshinException as e:
                 log.info(
                     f'[exception][{user_id}]claimDailyReward: {game_name[game]}[retcode]{e.retcode} [Exceptions]{e.original}')
@@ -247,7 +247,7 @@ class GenshinApp:
                     f'[exception][{user_id}]claimDailyReward: {game_name[game]}[Exceptions]{e}')
                 return f'{game_name[game]}Failed to sign in: {e}'
             else:
-                return f'{game_name[game]}Sign in done successfully, got {reward.amount}x {reward.name}！'
+                return f'{game_name[game]} Sign in done successfully, got {reward.amount} x {reward.name}！'
 
         result = await claimReward(genshin.Game.GENSHIN)
         if honkai:
@@ -417,11 +417,11 @@ class GenshinApp:
         """
         if user_id not in self.__user_data.keys():
             log.info(f'[News][{user_id}]checkUserData: User not found')
-            return False, f'Cannot find the user, please set a cookie first (enter `/cookie setting` to display the description)'
+            return False, f'Cannot find the user, please set a cookie first (enter `/setup` to display the description)'
         else:
             if 'cookie' not in self.__user_data[user_id].keys():
                 log.info(f'[News][{user_id}]checkUserData: Cookie not foundv')
-                return False, f"Can't find cookie, please set cookie first (enter `/cookie setting` to display instructions)"
+                return False, f"Can't find cookie, please set cookie first (enter `/setup` to display instructions)"
             if checkUID and 'uid' not in self.__user_data[user_id].keys():
                 log.info(
                     f'[News][{user_id}]checkUserData: Character UID not found')
