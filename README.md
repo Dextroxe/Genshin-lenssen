@@ -3,8 +3,10 @@ AKA Genshin-Lessen its run on the discord.py v2.0
 
 ## Transparency of the bot for public use 
 
+<<<<<<< HEAD
 <!-- {https://imgur.com/a/qYCnqIO} -->
 {https://i.imgur.com/h9H6c9c.png}
+
 
 That's how the bot profile look like if you are interested you can also add this bot to your very own server
 through QR code or from this link (https://cutt.ly/genshin-lessen)
