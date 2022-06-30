@@ -1,8 +1,6 @@
 import aiohttp
 import discord
 from typing import Any, Dict, List, Union, Optional
-
-from matplotlib.pyplot import title
 from utility.emoji import emoji
 from data.game.characters import characters_map
 from data.game.weapons import weapons_map
