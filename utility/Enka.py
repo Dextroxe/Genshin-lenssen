@@ -1,6 +1,8 @@
 import aiohttp
 import discord
 from typing import Any, Dict, List, Union, Optional
+
+from matplotlib.pyplot import title
 from utility.emoji import emoji
 from data.game.characters import characters_map
 from data.game.weapons import weapons_map
@@ -40,16 +42,19 @@ class Showcase:
         embed = discord.Embed(
             title=player.get('nickname', str(self.uid)),
             description=
-                f"```「{player.get('signature', '')}」\n"
-                f"Adventure Rank: {player.get('level', 1)}\n"
-                f"World Level: {player.get('worldLevel', 0)}\n"
-                f"Total Achievements: {player.get('finishAchievementNum', 0)}\n"
-                f"Spiral Abyss: {player.get('towerFloorIndex', 0)}-{player.get('towerLevelIndex', 0)}```"
+                f"   **「 {player.get('signature', '')} 」**\n"
+                f"<:Combat:992058814247485500> **Adventure Rank: **{player.get('level', 1)}\n"
+                f"<:archon_quest:992062501346873394> **World Level: **{player.get('worldLevel', 0)}\n"
+                f"<:exp:987399117418401842> **Total Achievements: **{player.get('finishAchievementNum', 0)}\n"
+                f"<:Spiral_Abyss:992061853062668368> **Spiral Abyss: **{player.get('towerFloorIndex', 0)}-{player.get('towerLevelIndex', 0)}"
         )
         if 'profilePicture' in player and 'avatarId' in player['profilePicture']:
             icon = characters_map[str(player['profilePicture']['avatarId'])]['icon']
             embed.set_thumbnail(url=icon)
+            embed.set_author(name="Enka.network",url="https://enka.shinshin.moe/",icon_url="https://pbs.twimg.com/profile_images/1504685226072719370/lmLkMCH5_400x400.png")
             embed.set_footer(text=f'UID: {self.uid}')
+            embed.set_image(url="https://i.ytimg.com/vi/ktyaN2M0rfM/maxresdefault.jpg")
+            embed.set_footer(text="Following Embed is using the Enka.network API to give you such result",icon_url="https://enka.shinshin.moe/")
         return embed
 
     def getCharacterStatEmbed(self, index: int) -> discord.Embed:
@@ -70,10 +75,10 @@ class Showcase:
         # basic information
         embed.add_field(
             name=f"character_information",
-            value=f"```Constellation: {0 if 'talentIdList' not in avatarInfo else len(avatarInfo['talentIdList'])}\n"
-                  f"Level: Lv. {avatarInfo['propMap']['4001']['val']}\n"
-                  f"Talent: {skill_level[0]}/{skill_level[1]}/{skill_level[2]}\n"
-                  f"Friendship: Lv. {avatarInfo['fetterInfo']['expLevel']}```",
+            value=f"<:Stella_Fortuna:992060189958230076> **Constellation:** {0 if 'talentIdList' not in avatarInfo else len(avatarInfo['talentIdList'])}\n"
+                  f"<:Ascension:992059222013521953> **Level: Lv.** {avatarInfo['propMap']['4001']['val']}\n"
+                  f"<:talent:992060993540734987> **Talent:** {skill_level[0]}/{skill_level[1]}/{skill_level[2]}\n"
+                  f"<:Character:992058802440515584> **Friendship: Lv.** {avatarInfo['fetterInfo']['expLevel']}",
         )
         # arms
         equipList: List[Dict[str, Any]] = avatarInfo['equipList']
@@ -85,10 +90,10 @@ class Showcase:
                 refinement += list(weapon['weapon']['affixMap'].values())[0]
             embed.add_field(
                 name=f"★{weapon['flat']['rankLevel']} {weapons_map[weapon['itemId']]['name']}",
-                value=f"```Refinement:{refinement}\n"
-                      f"Level: {weapon['weapon']['level']}\n"
-                      f"{emoji.fightprop.get('FIGHT_PROP_ATTACK', '')}base attack +{weaponStats[0]['statValue']}\n"
-                      f"{self.__getStatPropSentence(weaponStats[1]['appendPropId'], weaponStats[1]['statValue'])}```"
+                value=f"<:Combat:992058814247485500> **Refinement:** {refinement}\n"
+                      f"<:Ascension:992059222013521953> **Level:** {weapon['weapon']['level']}\n"
+                      f"{emoji.fightprop.get('FIGHT_PROP_ATTACK', '')} **base attack** +{weaponStats[0]['statValue']}\n"
+                      f"{self.__getStatPropSentence(weaponStats[1]['appendPropId'], weaponStats[1]['statValue'])}"
             )
         # character Information
         prop: Dict[str, float] = avatarInfo['fightPropMap']
@@ -96,9 +101,9 @@ class Showcase:
             id in ['20', '22', '28', '26', '23', '30', '40', '41', '42', '43', '44', '45', '46'] if prop[id] > 0])
         embed.add_field(
             name='character_info',
-            value=f"```{emoji.fightprop.get('FIGHT_PROP_HP','')}HP: {round(prop['2000'])} ({round(prop['1'])} +{round(prop['2000'])-round(prop['1'])})\n"
-                  f"{emoji.fightprop.get('FIGHT_PROP_ATTACK','')}Attack : {round(prop['2001'])} ({round(prop['4'])} +{round(prop['2001'])-round(prop['4'])})\n"
-                  f"{emoji.fightprop.get('FIGHT_PROP_DEFENSE','')}Defense: {round(prop['2002'])} ({round(prop['7'])} +{round(prop['2002'])-round(prop['7'])})```\n"
+            value=f"{emoji.fightprop.get('FIGHT_PROP_HP','')} HP: {round(prop['2000'])} ({round(prop['1'])} +{round(prop['2000'])-round(prop['1'])})\n"
+                  f"{emoji.fightprop.get('FIGHT_PROP_ATTACK','')} Attack : {round(prop['2001'])} ({round(prop['4'])} +{round(prop['2001'])-round(prop['4'])})\n"
+                  f"{emoji.fightprop.get('FIGHT_PROP_DEFENSE','')} Defense: {round(prop['2002'])} ({round(prop['7'])} +{round(prop['2002'])-round(prop['7'])})\n"
                   f"{substat}",
             inline=False
         )
@@ -123,7 +128,7 @@ class Showcase:
             pos_name = pos_name_map[artifcats_map[artifact_id]['pos']]
 
             # main entry attribute
-            embed_value = f"```{self.__getStatPropSentence(flat['reliquaryMainstat']['mainPropId'], flat['reliquaryMainstat']['statValue'])}```\n"
+            embed_value = f"{self.__getStatPropSentence(flat['reliquaryMainstat']['mainPropId'], flat['reliquaryMainstat']['statValue'])}\n"
 
             # Adverb entry attribute
             for substat in flat['reliquarySubstats']:
@@ -139,15 +144,15 @@ class Showcase:
             return f"{emoji.fightprop.get(prop, '')}{name}: {round(value / base, 1)}\n" if (value := substat_sum.get(prop)) != None else ''
         
         embed_value = ''
-        embed_value += substatSummary('FIGHT_PROP_ATTACK_PERCENT', '```Attack % ```', 5.0)
-        embed_value += substatSummary('FIGHT_PROP_HP_PERCENT', '```HP % ```', 5.0)
-        embed_value += substatSummary('FIGHT_PROP_DEFENSE_PERCENT', '```Defense % ```', 6.2)
-        embed_value += substatSummary('FIGHT_PROP_CHARGE_EFFICIENCY', '```Energy Rechangre ```', 5.5)
-        embed_value += substatSummary('FIGHT_PROP_ELEMENT_MASTERY', '```Elemental Mastery ```', 20)
-        embed_value += substatSummary('FIGHT_PROP_CRITICAL', '```Crit Rate ```', 3.3)
-        embed_value += substatSummary('FIGHT_PROP_CRITICAL_HURT', '```Crit Damage ```', 6.6)
+        embed_value += substatSummary('FIGHT_PROP_ATTACK_PERCENT', '  Attack % ', 5.0)
+        embed_value += substatSummary('FIGHT_PROP_HP_PERCENT', '  HP % ', 5.0)
+        embed_value += substatSummary('FIGHT_PROP_DEFENSE_PERCENT', '  Defense % ', 6.2)
+        embed_value += substatSummary('FIGHT_PROP_CHARGE_EFFICIENCY', '  **Energy Rechange** ', 5.5)
+        embed_value += substatSummary('FIGHT_PROP_ELEMENT_MASTERY', '  **Elemental Mastery** ', 20)
+        embed_value += substatSummary('FIGHT_PROP_CRITICAL', '  **Crit Rate** ', 3.3)
+        embed_value += substatSummary('FIGHT_PROP_CRITICAL_HURT', '  **Crit Damage** ', 6.6)
         if embed_value != '':
-            embed.add_field(name='Count of adverbs', value=embed_value)
+            embed.add_field(name=' **Count of adverbs** ', value=embed_value)
         
         return embed
 
@@ -155,11 +160,11 @@ class Showcase:
         id = character_id
         color = {'pyro': 0xfb4120, 'electro': 0xbf73e7, 'hydro': 0x15b1ff, 'cryo': 0x70daf1, 'dendro': 0xa0ca22, 'anemo': 0x5cd4ac, 'geo': 0xfab632}
         embed = discord.Embed(
-            title=f"★{characters_map[id]['rarity']} {characters_map[id]['name']}",
+            title=f"{characters_map[id]['rarity']}★ {characters_map[id]['name']}",
             color=color.get(characters_map[id]['element'].lower())
         )
         embed.set_thumbnail(url=characters_map[id]['icon'])
-        embed.set_author(name=f"{self.data['playerInfo']['nickname']}'s character showcase (click me)", url=self.url)
+        embed.set_author(name=f"{self.data['playerInfo']['nickname']}'s character from (enka.network)", url=self.url,icon_url="https://pbs.twimg.com/profile_images/1504685226072719370/lmLkMCH5_400x400.png")
         embed.set_footer(text=f"{self.data['playerInfo']['nickname']}. Lv. {self.data['playerInfo']['level']}. UID: {self.uid}")
 
         return embed

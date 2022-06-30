@@ -2,6 +2,7 @@ import datetime
 import discord
 import genshin
 import asyncio
+from datetime import datetime, timedelta
 from typing import Optional, Sequence
 from discord import app_commands
 from discord.ext import commands
@@ -38,10 +39,10 @@ class GenshinInfo(commands.Cog, name='Genshin_Impact_Information'):
         season='Select current or previous record',
         floor='Select the display method of floor person records')
     @app_commands.choices(
-        season=[Choice(name='previous cycle', value=0),
-                 Choice(name='Latest cycle', value=1)],
-         floor=[Choice(name='show all floors', value=0),
-                Choice(name='only show the last floor', value=1)])
+        season=[Choice(name='Previous abyss cycle', value=0),
+                 Choice(name='Latest abyss cycle', value=1)],
+         floor=[Choice(name='Show all floors', value=0),
+                Choice(name='Show last floor', value=1)])
     async def slash_abyss(self, interaction: discord.Interaction, season: int = 1, floor: int = 2):
         asyncio.create_task(interaction.response.defer())
         previous = True if season == 0 else False
@@ -54,6 +55,10 @@ class GenshinInfo(commands.Cog, name='Genshin_Impact_Information'):
         embed.title = f'{interaction.user.display_name} Spiral Abyss Info'
         if floor == 0: # [text] show all floors
             embed = genshin_app.parseAbyssFloor(embed, result, True)
+
+            embed.set_image(url="https://theclick.gg/wp-content/uploads/2021/07/Spiral_Abyss-genshin.png")
+            embed.set_thumbnail(url="https://theclick.gg/wp-content/uploads/2021/07/Spiral_Abyss-genshin.png")
+            embed.set_footer (text='``Challenge different floors of the tower and defeat the enemies within to win Abyssal Stars. Do this, and the Spiral Abyss may yet look upon your hard work and bestow rewards upon you.``',icon_url="https://theclick.gg/wp-content/uploads/2021/07/Spiral_Abyss-genshin.png")
             await interaction.edit_original_message(embed=embed)
         # elif floor == 1: # [text] only show the last layer
         #     embed = genshin_app.parseAbyssFloor(embed, result, False)

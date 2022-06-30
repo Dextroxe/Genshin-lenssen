@@ -59,13 +59,13 @@ class Schedule(commands.Cog, name='Automation(BETA)'):
         async def interaction_check(self, interaction: discord.Interaction) -> bool:
             return interaction.user.id == self.author.id
         
-        @discord.ui.button(label='it is good!', style=discord.ButtonStyle.blurple)
+        @discord.ui.button(label='plz do ping!', style=discord.ButtonStyle.blurple)
         async def option1(self, interaction: discord.Interaction, button: discord.ui.button):
             await interaction.response.defer()
             self.value = True
             self.stop()
         
-        @discord.ui.button(label='Need not', style=discord.ButtonStyle.blurple)
+        @discord.ui.button(label="plz don't ping!", style=discord.ButtonStyle.blurple)
         async def option2(self, interaction: discord.Interaction, button: discord.ui.button):
             await interaction.response.defer()
             self.value = False
